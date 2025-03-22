@@ -24,7 +24,7 @@ if [ ! -f composer.json ]; then
   time source .devpanel/composer_setup.sh
 fi
 echo
-time composer -n install --no-dev --no-progress
+time composer -n update --no-dev --no-progress
 
 #== Create the private files directory.
 if [ ! -d private ]; then
