@@ -6,7 +6,7 @@ cd $APP_ROOT
 # Create composer.json.
 composer create-project -n --no-install phenaproxima/xb-demo --stability=dev
 cp -r xb-demo/* ./
-rm -rf xb-demo
+rm -rf xb-demo patches.lock.json
 
 # Programmatically fix Composer 2.2 allow-plugins to avoid errors
 composer config --no-plugins allow-plugins.composer/installers true
