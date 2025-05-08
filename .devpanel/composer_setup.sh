@@ -211,7 +211,7 @@ composer config repositories.codemirror '{
         "license": "MIT"
     }
 }'
-composer require -n --no-update \
+composer require -n --no-plugins --no-install \
     codemirror/codemirror \
     cweagans/composer-patches:^2@beta \
     jquery/inputmask \
@@ -237,7 +237,7 @@ composer config --no-plugins scripts.post-drupal-scaffold-cmd \
     'cd web/sites/default && test -n "$(grep '\''include \$devpanel_settings;'\'' settings.php)" || patch -Np1 -r /dev/null < $APP_ROOT/.devpanel/drupal-settings.patch || :'
 
 # Install Experience Builder.
-composer config --no-plugins scripts.post-update-cmd \
+composer config --no-plugins scripts.post-install-cmd \
     '@putenv XB_UI_PATH=web/modules/contrib/experience_builder/ui' \
     'npm --prefix $XB_UI_PATH install' \
     'npm --prefix $XB_UI_PATH run build'
