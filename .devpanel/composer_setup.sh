@@ -4,7 +4,7 @@ set -eu -o pipefail
 cd $APP_ROOT
 
 # Create composer.json.
-composer create-project -n --no-install phenaproxima/xb-demo --stability=dev
+composer create-project -n --no-plugins --no-install phenaproxima/xb-demo --stability=dev
 cp -r xb-demo/* ./
 rm -rf xb-demo patches.lock.json
 
