@@ -7,6 +7,7 @@ on:
       - main
       - develop
       - test/*
+  workflow_dispatch:
 jobs:
   check-upstream-commits:
     runs-on: ubuntu-latest
