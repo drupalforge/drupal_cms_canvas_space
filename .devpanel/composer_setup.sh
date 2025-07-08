@@ -3,7 +3,7 @@ set -eu -o pipefail
 cd $APP_ROOT
 
 # Create required composer.json and composer.lock files.
-composer create-project -n --no-install ${PROJECT:=phenaproxima/xb-demo} --stability=dev
+composer create-project --no-install ${PROJECT:=phenaproxima/xb-demo} --stability=dev
 cp -r "${PROJECT#*/}"/* ./
 rm -rf "${PROJECT#*/}" patches.lock.json
 
@@ -16,6 +16,3 @@ composer config -jm extra.drupal-scaffold.file-mapping '{
 }'
 composer config scripts.post-drupal-scaffold-cmd \
     'cd web/sites/default && test -z "$(grep '\''include \$devpanel_settings;'\'' settings.php)" && patch -Np1 -r /dev/null < $APP_ROOT/.devpanel/drupal-settings.patch || :'
-
-# Update Recipe Installer Kit.
-composer update -n --no-install drupal/recipe_installer_kit
