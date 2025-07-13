@@ -1,7 +1,7 @@
 name: Docker build and push template
 on:
   schedule:
-    - cron: '0 13 * * 0,1,2,3,4,5'
+    - cron: '0 11 * * 0,1,2,3,4,5'
   push:
     branches:
       - main
@@ -14,15 +14,20 @@ jobs:
     outputs:
       should_run: ${{ steps.check.outputs.should_run }}
     steps:
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh
+
       - name: Check for new commits in phenaproxima/xb-demo
-        if: github.event_name == 'schedule'
+        if: github.event_name != 'push'
         id: check
         run: |
           # Get the last successful run time of this workflow on this branch
-          LAST_RUN=$(gh api \
-            "repos/${GITHUB_REPOSITORY}/actions/workflows/docker-publish-template.yml/runs" \
-            -F branch="${GITHUB_REF_NAME}" \
-            -F status=success \
+          LAST_RUN=$(gh api --method GET \
+            /repos/${GITHUB_REPOSITORY}/actions/workflows/docker-publish-template.yml/runs \
+            -f branch="${GITHUB_REF_NAME}" \
+            -f status=success \
             -F per_page=1 \
             --jq '.workflow_runs[0].created_at')
 
@@ -48,7 +53,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
 
   build-application:
-    if: github.event_name != 'schedule' || needs.check-upstream-commits.outputs.should_run == 'true'
+    if: github.event_name == 'push' || needs.check-upstream-commits.outputs.should_run == 'true'
     uses: drupalforge/docker_publish_action/.github/workflows/docker-publish.yml@main
     with:
       dockerhub_username: ${{ vars.DOCKERHUB_USERNAME }}
