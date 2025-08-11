@@ -40,6 +40,7 @@ else
   time source .devpanel/composer_setup.sh
   echo
 fi
+# If update fails, change it to install.
 time composer -n update --no-dev --no-progress
 
 #== Create the private files directory.
@@ -111,6 +112,9 @@ fi
 echo
 echo 'Run cron.'
 time drush cron
+echo
+echo 'Populate caches.'
+time drush cache:warm
 
 #== Finish measuring script time.
 INIT_DURATION=$SECONDS

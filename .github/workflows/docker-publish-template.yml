@@ -1,12 +1,10 @@
 name: Docker build and push template
 on:
-  schedule:
-    - cron: '0 11 * * 0,1,2,3,4,5'
   push:
     branches:
       - main
-      - develop
-      - test/*
+  schedule:
+    - cron: '0 11 * * 0,1,2,3,4,5'
   workflow_dispatch:
 jobs:
   check-upstream-commits:

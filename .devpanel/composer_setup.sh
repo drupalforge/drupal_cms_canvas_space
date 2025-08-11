@@ -216,6 +216,8 @@ composer config repositories.codemirror '{
         "license": "MIT"
     }
 }'
+
+# Add Webform libraries and Composer Patches.
 composer require -n --no-update \
     codemirror/codemirror \
     jquery/inputmask \

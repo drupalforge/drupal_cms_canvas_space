@@ -35,3 +35,6 @@ drush -n updb
 echo
 echo 'Run cron.'
 drush cron
+echo
+echo 'Populate caches.'
+drush cache:warm
