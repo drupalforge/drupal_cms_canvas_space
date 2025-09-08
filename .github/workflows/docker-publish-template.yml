@@ -6,6 +6,8 @@ on:
   schedule:
     - cron: '0 11 * * 0,1,2,3,4,5'
   workflow_dispatch:
+permissions:
+  actions: write
 jobs:
   check-upstream-commits:
     runs-on: ubuntu-latest
