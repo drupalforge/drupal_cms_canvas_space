@@ -1,12 +1,5 @@
 {
     "patches": {
-        "drupal/canvas_page": [
-            {
-                "description": "#71: Fix component version errors",
-                "url": "https://github.com/darrenoh/xb-demo/commit/4e9b17b8246d90ea3521536eac53bad8f00a89a7.patch",
-                "depth": 3
-            }
-        ],
         "drupal/core": {
             "#3495988: Add redirect for incomplete install": "https://git.drupalcode.org/project/drupal/-/merge_requests/10680.patch",
             "#3499225: Fix recipe command running duplicate batch jobs": "https://git.drupalcode.org/project/drupal/-/merge_requests/10886.patch",
