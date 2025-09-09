@@ -7,11 +7,6 @@ composer create-project --no-install ${PROJECT:=phenaproxima/xb-demo} --stabilit
 cp -r "${PROJECT#*/}"/* ./
 rm -rf "${PROJECT#*/}" patches.lock.json
 
-# Fix Pathauto patch.
-composer config -jm extra.patches.drupal/canvas '{
-    "#3542392: Page path alias is not actually saved when pathauto is installed": "https://git.drupalcode.org/project/canvas/-/merge_requests/43.diff"
-}'
-
 # Scaffold settings.php.
 composer config -jm extra.drupal-scaffold.file-mapping '{
     "[web-root]/sites/default/settings.php": {
