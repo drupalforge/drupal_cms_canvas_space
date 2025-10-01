@@ -11,6 +11,9 @@
         },
         "drupal/space_ds": {
             "Fix styling for login page": "./local-patches/login-page-fixes.patch"
+        },
+        "drupal/canvas": {
+            "Fix JSON Schema comparison with order into account": "./local-patches/canvas-deep-sort-schema-before-comparing.patch"
         }
     }
 }

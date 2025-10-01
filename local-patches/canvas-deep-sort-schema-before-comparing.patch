@@ -1,0 +1,44 @@
+diff --git a/src/PropSource/DefaultRelativeUrlPropSource.php b/src/PropSource/DefaultRelativeUrlPropSource.php
+index 7c4fee7d..3828c14f 100644
+--- a/src/PropSource/DefaultRelativeUrlPropSource.php
++++ b/src/PropSource/DefaultRelativeUrlPropSource.php
+@@ -96,8 +96,9 @@ final class DefaultRelativeUrlPropSource extends PropSourceBase {
+       PropShape::normalize($sdc_prop_source['jsonSchema'])->resolvedSchema
+     )->schema;
+     
+-    ksort($sdc_prop_source['jsonSchema']);
+-    ksort($minimal);
++    // Deep sort both arrays to ensure that they are identical till this gets sorted: https://www.drupal.org/project/canvas/issues/3515074
++    $sdc_prop_source['jsonSchema'] = self::deepSort($sdc_prop_source['jsonSchema']);
++    $minimal = self::deepSort($minimal);
+ 
+     if ($sdc_prop_source['jsonSchema'] !== $minimal) {
+       throw new \LogicException(sprintf('Extraneous JSON Schema information detected: %s should have been just %s.', json_encode($sdc_prop_source['jsonSchema'], JSON_PRETTY_PRINT), json_encode($minimal, JSON_PRETTY_PRINT)));
+@@ -110,6 +111,27 @@ final class DefaultRelativeUrlPropSource extends PropSourceBase {
+     );
+   }
+ 
++  /**
++   * Recursively sort an array by keys. If the array is a list, it will not be
++   * sorted.
++   */
++  private static function deepSort($array) {
++    if (!is_array($array)) {
++      return $array;
++    }
++    
++    foreach ($array as $key => $value) {
++      if (is_array($value)) {
++        $array[$key] = self::deepSort($value);
++      }
++    }
++    
++    if (array_keys($array) !== range(0, count($array) - 1)) {
++      ksort($array);
++    }
++    
++    return $array;
++  }
+   /**
+    * {@inheritdoc}
+    */
