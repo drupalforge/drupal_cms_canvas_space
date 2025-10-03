@@ -1,0 +1,12 @@
+diff --git a/templates/layout/page--front.html.twig b/templates/layout/page--front.html.twig
+index 24e15714..c42249ac 100644
+--- a/templates/layout/page--front.html.twig
++++ b/templates/layout/page--front.html.twig
+@@ -60,7 +60,6 @@
+   <main role="main">
+     <a id="main-content" tabindex="-1"></a>
+     <div class="layout-content">
+-      {% include '@space_ds/block/block--homepage-hero-banner.twig' %}
+       {{ page.content }}
+     </div>
+   </main>

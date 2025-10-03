@@ -10,7 +10,8 @@
             "#3497485: Fix remaining duplication of batch jobs": "https://git.drupalcode.org/project/recipe_installer_kit/-/merge_requests/4.patch"
         },
         "drupal/space_ds": {
-            "Fix styling for login page": "./local-patches/login-page-fixes.patch"
+            "Fix styling for login page": "./local-patches/login-page-fixes.patch",
+            "Update front page template": "./local-patches/update-front-page-template.patch"
         },
         "drupal/canvas": {
             "Fix JSON Schema comparison with order into account": "./local-patches/canvas-deep-sort-schema-before-comparing.patch"
