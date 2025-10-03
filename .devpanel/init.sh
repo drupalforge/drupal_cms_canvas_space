@@ -75,6 +75,14 @@ if [ ! -f .devpanel/salt.txt ]; then
   time openssl rand -hex 32 > .devpanel/salt.txt
 fi
 
+#== Check if upload_files directory has files and copy them to web/sites/default/files.
+if [ -d upload_files ] && [ "$(ls -A upload_files)" ]; then
+  echo
+  echo 'Copying files from upload_files to web/sites/default/files.'
+  time mkdir -p web/sites/default/files
+  time cp -r upload_files/* web/sites/default/files/
+fi
+
 #== Check if the /var/www/html/postgresql directory doesn't exist.
 #if [ ! -d /var/www/html/postgresql ]; then
   #echo 'Moving the PostgreSQL data directory to /var/www/html/postgresql.'
